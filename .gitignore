@@ -1,0 +1,61 @@
+# ---------- Operating System ----------
+.DS_Store                 # macOS 资源管理器残留
+Thumbs.db                 # Windows 缩略图缓存
+desktop.ini               # Windows 文件夹图标配置
+$RECYCLE.BIN/             # Windows 回收站
+*.lnk                     # Windows 快捷方式
+
+# ---------- Editors / IDE ----------
+.vscode/                  # VS Code 配置（按需决定是否纳入，常规不纳入）
+.idea/                    # JetBrains IDE 配置
+*.swp                     # Vim 交换文件
+*.swo
+*~                         # 各类编辑器临时文件
+
+# ---------- Secrets & Env ----------
+.env
+.env.*
+!.env.example             # .env.example 作为模板例外跟踪
+
+# ---------- Build Artefacts ----------
+node_modules/
+dist/
+build/
+bin/
+obj/
+out/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.class
+__pycache__/
+*.pyc
+*.pyo
+
+# ---------- Logs ----------
+*.log
+logs/
+
+# ---------- Backups ----------
+*.bak
+*.tmp
+*.swp
+backup/
+*.zip
+*.tar.gz
+
+# ---------- Tooling ----------
+.gradle/
+mvnw
+mvnw.cmd
+*.iml
+.target/
+.cxx/
+
+# ---------- Project-specific (本作品集专属) ----------
+# 学生平时作业代码放在 weekXX/ 下，作业内部若跑程序可能产生的 _test/ 实验残留：
+**/run-output/
+**/__pycache__/
+**/*.exe
