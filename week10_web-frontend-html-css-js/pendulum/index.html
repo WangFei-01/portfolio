@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="color-scheme" content="dark" />
+  <title>单摆模拟器 · Week 10 Web 前端实战</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app__head">
+      <h1 class="app__title">🎯 单摆模拟器</h1>
+      <p class="app__subtitle">Pendulum Simulator · RK4 物理积分 · 适用于第 10 周《Web 前端入门》课程实践</p>
+    </header>
+
+    <section class="stage" aria-label="动画区">
+      <canvas id="canvas" class="canvas" aria-label="单摆动画画面"></canvas>
+      <div class="legend" aria-hidden="true">
+        <span>g = <em id="legend-g">9.81</em> m/s²</span>
+        <span>L = <em id="legend-L">1.50</em> m</span>
+        <span>θ = <em id="legend-theta">28</em>°</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="控制面板">
+      <fieldset class="panel__group scenes">
+        <legend>🌌 天体预设</legend>
+        <div class="scenes__row" role="radiogroup" aria-label="天体预设">
+          <button class="capsule" type="button" role="radio" data-scene="earth" aria-checked="true"  title="地球重力">
+            <span class="capsule__emoji" aria-hidden="true">🌏</span>
+            <span class="capsule__label">地球</span>
+            <span class="capsule__g">9.81</span>
+          </button>
+          <button class="capsule" type="button" role="radio" data-scene="moon"   aria-checked="false" title="月球重力">
+            <span class="capsule__emoji" aria-hidden="true">🌙</span>
+            <span class="capsule__label">月球</span>
+            <span class="capsule__g">1.62</span>
+          </button>
+          <button class="capsule" type="button" role="radio" data-scene="jupiter" aria-checked="false" title="木星重力">
+            <span class="capsule__emoji" aria-hidden="true">🪐</span>
+            <span class="capsule__label">木星</span>
+            <span class="capsule__g">24.79</span>
+          </button>
+          <button class="capsule" type="button" role="radio" data-scene="space"  aria-checked="false" title="太空微重力">
+            <span class="capsule__emoji" aria-hidden="true">🛰️</span>
+            <span class="capsule__label">太空</span>
+            <span class="capsule__g">0.20</span>
+          </button>
+        </div>
+      </fieldset>
+
+      <fieldset class="panel__group">
+        <legend>🧪 物理参数</legend>
+
+        <label class="slider">
+          <span class="slider__label">重力 g <em data-display="g">9.81</em> m/s²</span>
+          <input type="range" id="g-slider" min="0" max="30" step="0.01" value="9.81" />
+        </label>
+        <label class="slider">
+          <span class="slider__label">摆长 L <em data-display="L">1.50</em> m</span>
+          <input type="range" id="L-slider" min="0.3" max="3" step="0.01" value="1.5" />
+        </label>
+        <label class="slider">
+          <span class="slider__label">阻尼 d <em data-display="d">0.050</em></span>
+          <input type="range" id="d-slider" min="0" max="0.5" step="0.005" value="0.05" />
+        </label>
+        <label class="slider">
+          <span class="slider__label">初角 θ <em data-display="theta">28</em>°</span>
+          <input type="range" id="theta-slider" min="0" max="89" step="0.5" value="28" />
+        </label>
+      </fieldset>
+
+      <div class="panel__group actions">
+        <button class="btn btn--toggle" id="toggle-btn" type="button">⏸ 暂停</button>
+        <button class="btn btn--reset"  id="reset-btn"  type="button">↺ 重置</button>
+        <button class="btn btn--clear"  id="clear-btn"  type="button" title="清空 localStorage 缓存">🗑 清缓存</button>
+      </div>
+
+      <p class="status" id="status" role="status" aria-live="polite">
+        就绪 · 所有改动自动保存在浏览器本地
+      </p>
+    </section>
+
+    <footer class="app__foot">
+      <p>
+        💡 切天体 → 重力在 600 ms 内 <strong>easeInOutCubic</strong> 平滑过渡；
+        滑块拖动 → 自动保存到 <code>localStorage["pendulum.config.v1"]</code>；
+        刷新/重开 → 自动恢复上次参数。
+      </p>
+    </footer>
+  </main>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>
